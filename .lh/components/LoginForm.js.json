@@ -1,0 +1,18 @@
+{
+    "sourceFile": "components/LoginForm.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1751213661419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1751213661419,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\r\nimport { useNavigate } from 'react-router-dom';\r\n\r\nconst API_URL = 'http://localhost:5000/api/admin';\r\n\r\nexport default function LoginForm() {\r\n  const [email, setEmail] = useState('');\r\n  const [password, setPassword] = useState('');\r\n  const [msg, setMsg] = useState('');\r\n  const navigate = useNavigate();\r\n\r\n  const handleAuth = async (endpoint) => {\r\n    try {\r\n      const res = await fetch(`${API_URL}/${endpoint}`, {\r\n        method: 'POST',\r\n        headers: { 'Content-Type': 'application/json' },\r\n        body: JSON.stringify({ email, password }),\r\n      });\r\n      const data = await res.json();\r\n\r\n      if (res.ok) {\r\n        localStorage.setItem('token', data.token);\r\n        navigate('/dashboard');\r\n      } else {\r\n        setMsg(data.msg || 'Auth failed');\r\n      }\r\n    } catch {\r\n      setMsg('Network error');\r\n    }\r\n  };\r\n\r\n  return (\r\n    <div>\r\n      <h2>Admin Login / Signup</h2>\r\n      <input\r\n        type=\"email\"\r\n        placeholder=\"Email\"\r\n        value={email}\r\n        onChange={e => setEmail(e.target.value)}\r\n      /><br />\r\n      <input\r\n        type=\"password\"\r\n        placeholder=\"Password\"\r\n        value={password}\r\n        onChange={e => setPassword(e.target.value)}\r\n      /><br />\r\n      <button onClick={() => handleAuth('login')}>Login</button>\r\n      <button onClick={() => handleAuth('signup')}>Signup</button>\r\n      <p>{msg}</p>\r\n    </div>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

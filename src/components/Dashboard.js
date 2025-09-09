@@ -35,13 +35,13 @@ export default function Dashboard() {
 
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const API_BASE = "https://test-7ze7bdl9s-exoessai123456-designs-projects.vercel.app/api";
+  const API_BASE = "https://test-4lu2t04b6-exoessai123456-designs-projects.vercel.app/api";
   const authHeaders = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
 
   useEffect(() => {
     if (!token) return;
 
-    fetch(`${API_BASE}/admin/profile`, { headers: authHeaders })
+    fetch(`${API_BASE}/auth/profile`, { headers: authHeaders })
       .then(res => (res.ok ? res.json() : Promise.reject()))
       .then(setProfile)
       .catch(() => localStorage.removeItem('token'));

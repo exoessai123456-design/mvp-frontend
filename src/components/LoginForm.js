@@ -10,7 +10,7 @@ import {
   Stack,
 } from '@mui/material';
 
-const API_URL = 'https://dc0a0cd1-d240-48be-b952-7bccd36ae096-00-1anh6iywojxcz.janeway.replit.dev/api/admin';
+const API_URL = 'https://test-4lu2t04b6-exoessai123456-designs-projects.vercel.app/api/auth';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');

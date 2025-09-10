@@ -35,7 +35,7 @@ export default function Dashboard() {
 
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const API_BASE = "https://mvp-backend-j32p79y4a-exoessai123456-designs-projects.vercel.app/api";
+  const API_BASE = "https://mvp-backend-puce.vercel.app/api/auth/api";
   const authHeaders = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
 
   useEffect(() => {

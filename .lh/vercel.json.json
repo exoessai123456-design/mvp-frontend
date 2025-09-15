@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1757959055886,
@@ -24,6 +24,14 @@
                 {
                     "date": 1757960313606,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n {\n   \"rewrites\": [\n-    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n+    { \"source\": \"/(.*)\", \"destination\": \"/\" }\n   ]\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1757960676021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+{\n+  \"rewrites\": [\n+    { \"source\": \"/api/(.*)\", \"destination\": \"/api/$1\" }, // preserve serverless API\n+    { \"source\": \"/(.*)\", \"destination\": \"/\" }            // all other routes handled by SPA\n+  ]\n+}\n"
+                },
+                {
+                    "date": 1757960682036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n {\n   \"rewrites\": [\n     { \"source\": \"/api/(.*)\", \"destination\": \"/api/$1\" }, \n-    { \"source\": \"/(.*)\", \"destination\": \"/\" }            // all other routes handled by SPA\n+    { \"source\": \"/(.*)\", \"destination\": \"/\" }            \n   ]\n }\n"
                 }
             ],
             "date": 1757959055886,

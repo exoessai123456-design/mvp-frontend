@@ -151,7 +151,10 @@ export default function Dashboard() {
       <NavBar username={profile?.username} onLogout={()=>{localStorage.removeItem('token'); navigate('/');}}/>
       <Container maxWidth="lg" sx={{ mt:4 }}>
         <Box boxShadow={3} p={2} bgcolor="white" borderRadius={2}>
-          <FullCalendar plugins={[dayGridPlugin, interactionPlugin]} initialView="dayGridMonth" selectable events={events} dateClick={handleDateClick}/>
+          <FullCalendar plugins={[dayGridPlugin, interactionPlugin]} initialView="dayGridMonth" selectable  events={events.map(e => ({
+    ...e,
+    start: dayjs(e.date).locale().toDate(), e
+  }))} dateClick={handleDateClick}/>
         </Box>
       </Container>
 

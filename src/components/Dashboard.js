@@ -18,7 +18,7 @@ import Papa from 'papaparse';
 const HOURS = Array.from({ length: 17 }, (_, i) => 8 + i); // 08:00 to 00:00
 
 function formatHour(h) {
-  if (typeof h !== 'number') return ''; 
+  if (typeof h !== 'number') return '';
   return h === 24 ? '00:00' : `${h.toString().padStart(2, '0')}:00`;
 }
 
@@ -41,14 +41,23 @@ export default function Dashboard() {
   useEffect(() => {
     if (!token) return;
 
+    // Fetch profile
     fetch(`${API_BASE}/auth/profile`, { headers: authHeaders })
       .then(res => (res.ok ? res.json() : Promise.reject()))
       .then(setProfile)
       .catch(() => localStorage.removeItem('token'));
 
+    // Fetch events and convert UTC -> local for FullCalendar
     fetch(`${API_BASE}/events`, { headers: authHeaders })
       .then(res => res.json())
-      .then(setEvents)
+      .then(data => {
+        const localEvents = data.map(ev => ({
+          ...ev,
+          start: dayjs(ev.date).local().format('YYYY-MM-DD'), // local all-day date
+          allDay: true
+        }));
+        setEvents(localEvents);
+      })
       .catch(console.error);
   }, [token]);
 
@@ -68,7 +77,7 @@ export default function Dashboard() {
   const findEventAtHour = (hour) => {
     if (!selectedDay) return null;
     const prefix = `${selectedDay}T${formatHour(hour)}`;
-    return events.find(e => e.date.startsWith(prefix));
+    return events.find(e => e.date?.startsWith(prefix) || e.start?.startsWith(selectedDay + 'T'));
   };
 
   const validate = () => {
@@ -105,13 +114,13 @@ export default function Dashboard() {
         if (window.confirm("Modify this event?")) {
           const res = await fetch(`${API_BASE}/events/${existingEvent._id}`, { method:'PUT', headers: authHeaders, body: JSON.stringify(eventPayload) });
           const updated = await res.json();
-          setEvents(events.map(e => e._id===updated._id?updated:e));
+          setEvents(events.map(e => e._id===updated._id ? {...updated, start: dayjs(updated.date).local().format('YYYY-MM-DD'), allDay:true} : e));
         }
       } else {
         const res = await fetch(`${API_BASE}/events`, { method:'POST', headers: authHeaders, body: JSON.stringify(eventPayload) });
         if (!res.ok) throw new Error("Event creation failed");
         const created = await res.json();
-        setEvents([...events, created]);
+        setEvents([...events, {...created, start: dayjs(created.date).local().format('YYYY-MM-DD'), allDay:true}]);
         window.alert("Event created successfully!");
       }
       setOpenEventForm(false); setEditingHour(null);
@@ -127,7 +136,10 @@ export default function Dashboard() {
     try {
       await fetch(`${API_BASE}/events/${existingEvent._id}`, { method:'DELETE', headers: authHeaders });
       setEvents(events.filter(e => e._id !== existingEvent._id));
-      if (editingHour === hourToDelete) { setOpenEventForm(false); setEditingHour(null); setFormData({ name:'', phone:'', type:'Point', status:'CONFIRMED' }); setErrors({}); }
+      if (editingHour === hourToDelete) {
+        setOpenEventForm(false); setEditingHour(null);
+        setFormData({ name:'', phone:'', type:'Point', status:'CONFIRMED' }); setErrors({});
+      }
     } catch (err) { console.error(err); }
   };
 
@@ -139,8 +151,8 @@ export default function Dashboard() {
   };
 
   const handleDateClick = (arg) => {
-    const clickedDate = arg.dateStr;
-    const hasEvent = events.some(e=>e.date.startsWith(clickedDate));
+    const clickedDate = dayjs(arg.date).format('YYYY-MM-DD'); // ensure local
+    const hasEvent = events.some(e=>e.start?.startsWith(clickedDate));
     if (isDateBeforeToday(clickedDate) && !hasEvent) { alert('No events on this past date.'); return; }
     setSelectedDay(clickedDate); setOpenDayModal(true); setEditingHour(null);
     setFormData({ name:'', phone:'', type:'Point', status:'CONFIRMED' }); setErrors({});
@@ -151,14 +163,18 @@ export default function Dashboard() {
       <NavBar username={profile?.username} onLogout={()=>{localStorage.removeItem('token'); navigate('/');}}/>
       <Container maxWidth="lg" sx={{ mt:4 }}>
         <Box boxShadow={3} p={2} bgcolor="white" borderRadius={2}>
-          <FullCalendar plugins={[dayGridPlugin, interactionPlugin]} initialView="dayGridMonth" selectable events={events.map(e => ({
-  ...e,
-  start: e.date.split('T')[0], // "2025-09-19"
-  allDay: true
-}))} dateClick={handleDateClick}/ >
+          <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            selectable
+            events={events}
+            timeZone="local"
+            dateClick={handleDateClick}
+          />
         </Box>
       </Container>
 
+      {/* --- Day Modal --- */}
       <Dialog open={openDayModal} onClose={()=>setOpenDayModal(false)} maxWidth="lg" fullWidth>
         <DialogTitle>Schedule for {selectedDay}</DialogTitle>
         <DialogContent>
@@ -170,7 +186,8 @@ export default function Dashboard() {
             </TableHead>
             <TableBody>
               {HOURS.map(hour=>{
-                const ev=findEventAtHour(hour); const isPast=isDateBeforeToday(selectedDay)||isHourInPast(selectedDay,hour);
+                const ev = findEventAtHour(hour);
+                const isPast = isDateBeforeToday(selectedDay) || isHourInPast(selectedDay,hour);
                 return <TableRow key={hour}>
                   <TableCell>{formatHour(hour)}</TableCell>
                   <TableCell>{ev?.title||''}</TableCell>
@@ -191,14 +208,23 @@ export default function Dashboard() {
         <DialogActions>
           <Button onClick={()=>setOpenDayModal(false)} variant="contained" color="primary">Close</Button>
           <Button variant="contained" color="success" onClick={()=>{
-            const filtered=events.filter(e=>dayjs(e.date).startOf('day').isSame(dayjs(selectedDay).startOf('day')));
+            const filtered=events.filter(e=>dayjs(e.start).startOf('day').isSame(dayjs(selectedDay).startOf('day')));
             if(filtered.length===0){alert('No events found for this day.');return;}
-            const csv=Papa.unparse(filtered.map(e=>({title:e.title,date:dayjs(e.date).format('M/D/YYYY'),time:dayjs(e.date).format('HH:mm'),name:e.name,phone:e.phone,type:e.type,status:e.status})));
+            const csv=Papa.unparse(filtered.map(e=>({
+              title:e.title,
+              date:dayjs(e.start).format('M/D/YYYY'),
+              time:dayjs(e.date).format('HH:mm'),
+              name:e.name,
+              phone:e.phone,
+              type:e.type,
+              status:e.status
+            })));
             saveAs(new Blob([csv],{type:'text/csv;charset=utf-8;'}),`events_${dayjs(selectedDay).format('YYYY-MM-DD')}.csv`);
           }}>Export CSV</Button>
         </DialogActions>
       </Dialog>
 
+      {/* --- Event Form Dialog --- */}
       <Dialog open={openEventForm} onClose={()=>setOpenEventForm(false)} maxWidth="sm" fullWidth>
         <DialogTitle>{editingHour!==null && findEventAtHour(editingHour)?'Modify Event':'Add Event'}</DialogTitle>
         <DialogContent>

@@ -1,0 +1,46 @@
+{
+    "sourceFile": "vercel.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1758478186811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1758478331050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+{\n+  \"version\": 3,\n+  \"builds\": [\n+    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n+  ],\n+  \"routes\": [\n+    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n+  ]\n+}\n"
+                },
+                {
+                    "date": 1758478373169,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+{\n+  \"version\": 3,\n+  \"builds\": [\n+    {\n+      \"src\": \"package.json\",\n+      \"use\": \"@vercel/static-build\",\n+      \"config\": { \"distDir\": \"build\" }\n+    }\n+  ],\n+  \"routes\": [\n+    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n+  ]\n+}\n"
+                },
+                {
+                    "date": 1758478435532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+{\n+  \"version\": 2,\n+  \"builds\": [\n+    {\n+      \"src\": \"package.json\",\n+      \"use\": \"@vercel/static-build\",\n+      \"config\": { \"distDir\": \"build\" }\n+    }\n+  ],\n+  \"routes\": [\n+    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n+  ]\n+}\n"
+                },
+                {
+                    "date": 1758478530756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,31 +10,4 @@\n   \"routes\": [\n     { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n   ]\n }\n-{\n-  \"version\": 3,\n-  \"builds\": [\n-    {\n-      \"src\": \"package.json\",\n-      \"use\": \"@vercel/static-build\",\n-      \"config\": { \"distDir\": \"build\" }\n-    }\n-  ],\n-  \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n-  ]\n-}\n-{\n-  \"version\": 3,\n-  \"builds\": [\n-    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n-  ],\n-  \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n-  ]\n-}\n-{\n-  \"rewrites\": [\n-    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n-  ]\n-}²\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1758478629773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,8 @@\n {\n   \"version\": 2,\n   \"builds\": [\n-    {\n-      \"src\": \"package.json\",\n-      \"use\": \"@vercel/static-build\",\n-      \"config\": { \"distDir\": \"build\" }\n-    }\n+    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\", \"config\": { \"distDir\": \"build\" } }\n   ],\n   \"routes\": [\n     { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n   ]\n"
+                },
+                {
+                    "date": 1758478878579,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n {\n   \"version\": 2,\n   \"builds\": [\n-    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\", \"config\": { \"distDir\": \"build\" } }\n+    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n   ],\n   \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n+    { \"src\": \"/.*\", \"dest\": \"/index.html\" }\n   ]\n }\n"
+                },
+                {
+                    "date": 1758479664493,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,6 @@\n {\n   \"version\": 2,\n-  \"builds\": [\n-    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n-  ],\n-  \"routes\": [\n-    { \"src\": \"/.*\", \"dest\": \"/index.html\" }\n+  \"rewrites\": [\n+    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n   ]\n-}\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1758478186811,
+            "name": "Commit-0",
+            "content": "{\n  \"rewrites\": [\n    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n  ]\n}²"
+        }
+    ]
+}

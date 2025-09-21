@@ -1,18 +1,18 @@
 {
-    "sourceFile": "src/components/index.js",
+    "sourceFile": "public/_redirects",
     "activeCommit": 0,
     "commits": [
         {
             "activePatchIndex": 0,
             "patches": [
                 {
-                    "date": 1751214544738,
+                    "date": 1758477569186,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
                 }
             ],
-            "date": 1751214544738,
+            "date": 1758477569186,
             "name": "Commit-0",
-            "content": "import 'bootstrap/dist/css/bootstrap.min.css';\r\n"
+            "content": "/*    /index.html   200"
         }
     ]
 }

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 15,
             "patches": [
                 {
                     "date": 1758925335813,
@@ -60,6 +60,14 @@
                 {
                     "date": 1762086488807,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n {\n   \"name\": \"mvp-frontend\",\n   \"version\": \"0.1.0\",\n   \"private\": true,\n-  \"proxy\" :\"http://localhost:4000\",\n+  proxy\" :\"http://localhost:4000\",\n   \"dependencies\": {\n     \"@emotion/react\": \"^11.14.0\",\n     \"@emotion/styled\": \"^11.14.1\",\n     \"@fullcalendar/core\": \"^6.1.17\",\n"
+                },
+                {
+                    "date": 1762091967099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n {\n   \"name\": \"mvp-frontend\",\n   \"version\": \"0.1.0\",\n   \"private\": true,\n-  proxy\" :\"http://localhost:4000\",\n   \"dependencies\": {\n     \"@emotion/react\": \"^11.14.0\",\n     \"@emotion/styled\": \"^11.14.1\",\n     \"@fullcalendar/core\": \"^6.1.17\",\n@@ -28,12 +27,9 @@\n     \"react-router-dom\": \"^7.8.2\",\n     \"react-scripts\": \"5.0.1\",\n     \"web-vitals\": \"^2.1.4\"\n   },\n-  \"scripts\": {\n-    \"start\": \"react-scripts start\",\n-    \"build\": \"react-scripts build\"\n-  },\n+  ,\n   \"eslintConfig\": {\n     \"extends\": [\n       \"react-app\",\n       \"react-app/jest\"\n"
+                },
+                {
+                    "date": 1762091973168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,12 @@\n     \"react-router-dom\": \"^7.8.2\",\n     \"react-scripts\": \"5.0.1\",\n     \"web-vitals\": \"^2.1.4\"\n   },\n-  ,\n+  \"scripts\": {\n+  \"start\": \"react-scripts start\",\n+  \"build\": \"CI=false react-scripts build\"\n+},\n   \"eslintConfig\": {\n     \"extends\": [\n       \"react-app\",\n       \"react-app/jest\"\n"
                 }
             ],
             "date": 1758925335813,

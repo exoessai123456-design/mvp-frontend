@@ -3,44 +3,100 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 21,
             "patches": [
                 {
-                    "date": 1758478186811,
+                    "date": 1758927287045,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
                 },
                 {
-                    "date": 1758478331050,
-                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+{\n+  \"version\": 3,\n+  \"builds\": [\n+    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n+  ],\n+  \"routes\": [\n+    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n+  ]\n+}\n"
+                    "date": 1758927293365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+{\n+  \"rewrites\": [\n+    { \"source\": \"/api/(.*)\", \"destination\": \"/api/$1\" },  \n+    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" } \n+  ]\n+}\n\\ No newline at end of file\n"
                 },
                 {
-                    "date": 1758478373169,
-                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+{\n+  \"version\": 3,\n+  \"builds\": [\n+    {\n+      \"src\": \"package.json\",\n+      \"use\": \"@vercel/static-build\",\n+      \"config\": { \"distDir\": \"build\" }\n+    }\n+  ],\n+  \"routes\": [\n+    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n+  ]\n+}\n"
+                    "date": 1758927473024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,8 @@\n+{\n+  \"proxies\": [\n+    { \"source\": \"/api/(.*)\", \"destination\": \"http://localhost:3001/api/$1\" }\n+  ],\n+  \"rewrites\": [\n+    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n+  ]\n+}\n\\ No newline at end of file\n"
                 },
                 {
-                    "date": 1758478435532,
+                    "date": 1758927480419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,8 @@\n+{\n+  \"proxies\": [\n+    { \"source\": \"/api/(.*)\", \"destination\": \"http://localhost:4000/api/$1\" }\n+  ],\n+  \"rewrites\": [\n+    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n+  ]\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1758927589055,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,22 +1,6 @@\n {\n-  \"proxies\": [\n-    { \"source\": \"/api/(.*)\", \"destination\": \"http://localhost:4000/api/$1\" }\n-  ],\n   \"rewrites\": [\n+    { \"source\": \"/api/(.*)\", \"destination\": \"/index.html\" },  // not real API, just SPA fallback\n     { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n   ]\n-}\n-{\n-  \"proxies\": [\n-    { \"source\": \"/api/(.*)\", \"destination\": \"http://localhost:3001/api/$1\" }\n-  ],\n-  \"rewrites\": [\n-    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n-  ]\n-}\n-{\n-  \"rewrites\": [\n-    { \"source\": \"/api/(.*)\", \"destination\": \"/api/$1\" },  \n-    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" } \n-  ]\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1758927596223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n {\n   \"rewrites\": [\n-    { \"source\": \"/api/(.*)\", \"destination\": \"/index.html\" },  // not real API, just SPA fallback\n+    { \"source\": \"/api/(.*)\", \"destination\": \"/index.html\" },  \n     { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n   ]\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1758974194393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n {\n   \"rewrites\": [\n-    { \"source\": \"/api/(.*)\", \"destination\": \"/index.html\" },  \n     { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n   ]\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1758974998370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n {\n   \"rewrites\": [\n+    { \"source\": \"/api/(.*)\", \"destination\": \"/api/$1\" },\n     { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n   ]\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1758975327854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,5 @@\n+{\n+  \"rewrites\": [\n+    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n+  ]\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1758975774373,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,6 @@\n {\n   \"rewrites\": [\n+    { \"source\": \"/api/(.*)\", \"destination\": \"http://localhost:5000/api/$1\" },\n     { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n   ]\n }\n-{\n-  \"rewrites\": [\n-    { \"source\": \"/api/(.*)\", \"destination\": \"/api/$1\" },\n-    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n-  ]\n\\ No newline at end of file\n-}\n"
+                },
+                {
+                    "date": 1758975779527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+{\n+  \"rewrites\": [\n+    { \"source\": \"/api/(.*)\", \"destination\": \"http://localhost:4000/api/$1\" },\n+    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n+  ]\n+}\n"
+                },
+                {
+                    "date": 1760279142949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,5 @@\n {\n   \"rewrites\": [\n-    { \"source\": \"/api/(.*)\", \"destination\": \"http://localhost:4000/api/$1\" },\n     { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n   ]\n-}\n-{\n-  \"rewrites\": [\n-    { \"source\": \"/api/(.*)\", \"destination\": \"http://localhost:5000/api/$1\" },\n-    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n-  ]\n-}\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1760279441356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,8 @@\n {\n-  \"rewrites\": [\n-    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n+  \"builds\": [\n+    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n+  ],\n+  \"routes\": [\n+    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n   ]\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1760279669990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n {\n   \"builds\": [\n-    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n+    {\n+      \"src\": \"package.json\",\n+      \"use\": \"@vercel/static-build\",\n+      \"config\": { \"distDir\": \"build\" }\n+    }\n\\ No newline at end of file\n   ],\n   \"routes\": [\n     { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n   ]\n-}\n+}\n"
+                },
+                {
+                    "date": 1760280408961,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+{\n+  \"version\": 2,\n+  \"builds\": [\n+    {\n+      \"src\": \"package.json\",\n+      \"use\": \"@vercel/static-build\",\n+      \"config\": { \"distDir\": \"build\" }\n+    }\n+  ],\n+  \"routes\": [\n+    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n+  ]\n+}\n"
                 },
                 {
-                    "date": 1758478530756,
-                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,31 +10,4 @@\n   \"routes\": [\n     { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n   ]\n }\n-{\n-  \"version\": 3,\n-  \"builds\": [\n-    {\n-      \"src\": \"package.json\",\n-      \"use\": \"@vercel/static-build\",\n-      \"config\": { \"distDir\": \"build\" }\n-    }\n-  ],\n-  \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n-  ]\n-}\n-{\n-  \"version\": 3,\n-  \"builds\": [\n-    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n-  ],\n-  \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n-  ]\n-}\n-{\n-  \"rewrites\": [\n-    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n-  ]\n-}²\n\\ No newline at end of file\n"
+                    "date": 1760280956019,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,17 +9,5 @@\n   ],\n   \"routes\": [\n     { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n   ]\n-}\n-{\n-  \"builds\": [\n-    {\n-      \"src\": \"package.json\",\n-      \"use\": \"@vercel/static-build\",\n-      \"config\": { \"distDir\": \"build\" }\n-    }\n-  ],\n-  \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n-  ]\n }\n\\ No newline at end of file\n"
                 },
                 {
-                    "date": 1758478629773,
-                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,8 @@\n {\n   \"version\": 2,\n   \"builds\": [\n-    {\n-      \"src\": \"package.json\",\n-      \"use\": \"@vercel/static-build\",\n-      \"config\": { \"distDir\": \"build\" }\n-    }\n+    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\", \"config\": { \"distDir\": \"build\" } }\n   ],\n   \"routes\": [\n     { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n   ]\n"
+                    "date": 1760281442345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+{\n+  \"version\": 2,\n+  \"builds\": [\n+    {\n+      \"src\": \"package.json\",\n+      \"use\": \"@vercel/static-build\",\n+      \"config\": { \"distDir\": \"build\" }\n+    }\n+  ],\n+  \"routes\": [\n+    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n+  ]\n+}\n"
                 },
                 {
-                    "date": 1758478878579,
-                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n {\n   \"version\": 2,\n   \"builds\": [\n-    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\", \"config\": { \"distDir\": \"build\" } }\n+    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n   ],\n   \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n+    { \"src\": \"/.*\", \"dest\": \"/index.html\" }\n   ]\n }\n"
+                    "date": 1760281703025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,17 +10,4 @@\n   \"routes\": [\n     { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n   ]\n }\n-{\n-  \"version\": 2,\n-  \"builds\": [\n-    {\n-      \"src\": \"package.json\",\n-      \"use\": \"@vercel/static-build\",\n-      \"config\": { \"distDir\": \"build\" }\n-    }\n-  ],\n-  \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n-  ]\n-}\n\\ No newline at end of file\n"
                 },
                 {
-                    "date": 1758479664493,
-                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,6 @@\n {\n   \"version\": 2,\n-  \"builds\": [\n-    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n-  ],\n-  \"routes\": [\n-    { \"src\": \"/.*\", \"dest\": \"/index.html\" }\n+  \"rewrites\": [\n+    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n   ]\n-}\n+}\n\\ No newline at end of file\n"
+                    "date": 1760383210134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,1 @@\n-{\n-  \"version\": 2,\n-  \"builds\": [\n-    {\n-      \"src\": \"package.json\",\n-      \"use\": \"@vercel/static-build\",\n-      \"config\": { \"distDir\": \"build\" }\n-    }\n-  ],\n-  \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\n-  ]\n-}\n+package.json\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1760383219283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,5 @@\n+{\n+  \"rewrites\": [\n+    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n+  ]\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1762087299212,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n {\n-  \"rewrites\": [\n-    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n+  \"builds\": [\n+    { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n+  ],\n\\ No newline at end of file\n+  \"routes\": [\n+    { \"src\": \"/(.*)\", \"dest\": \"/\" }\n   ]\n }\n-package.json\n+T\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1762088014196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n {\n   \"builds\": [\n     { \"src\": \"package.json\", \"use\": \"@vercel/static-build\" }\n   ],\n-  \"routes\": [\n-    { \"src\": \"/(.*)\", \"dest\": \"/\" }\n+  \"rewrites\": [\n+    { \"source\": \"/(.*)\", \"destination\": \"/\" }\n   ]\n }\n\\ No newline at end of file\n"
                 }
             ],
-            "date": 1758478186811,
+            "date": 1758927287045,
             "name": "Commit-0",
-            "content": "{\n  \"rewrites\": [\n    { \"source\": \"/(.*)\", \"destination\": \"/index.html\" }\n  ]\n}²"
+            "content": ""
         }
     ]
 }

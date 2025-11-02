@@ -1,18 +1,18 @@
 {
-    "sourceFile": "public/_redirects",
+    "sourceFile": "netlify.toml",
     "activeCommit": 0,
     "commits": [
         {
             "activePatchIndex": 0,
             "patches": [
                 {
-                    "date": 1758477569186,
+                    "date": 1760384613915,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
                 }
             ],
-            "date": 1758477569186,
+            "date": 1760384613915,
             "name": "Commit-0",
-            "content": "/*    /index.html   200"
+            "content": "[build]\r\n  publish = \"build\"\r\n  command = \"npm run build\"\r\n\r\n[[redirects]]\r\n  from = \"/*\"\r\n  to = \"/index.html\"\r\n  status = 200"
         }
     ]
 }

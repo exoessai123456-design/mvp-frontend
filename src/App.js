@@ -5,14 +5,11 @@ import Dashboard from './components/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
-
-
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LoginForm />} />
-
         <Route
           path="/dashboard"
           element={
@@ -21,8 +18,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-        {/* 🔁 Catch-all route to redirect unknown paths to login */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

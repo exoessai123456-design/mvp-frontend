@@ -1,0 +1,18 @@
+{
+    "sourceFile": "build/deploy-vercel.ps1",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1760282055779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1760282055779,
+            "name": "Commit-0",
+            "content": "# -------------------------------\r\n# 1️⃣ Navigate to project root\r\n# -------------------------------\r\ncd C:\\Users\\DELL\\Desktop\\PROPRIETE\\business\\mvp-frontend\r\n\r\n# -------------------------------\r\n# 2️⃣ Remove old Vercel config\r\n# -------------------------------\r\nif (Test-Path .vercel) {\r\n    Write-Host \"Removing old .vercel folder...\"\r\n    Remove-Item -Recurse -Force .vercel\r\n}\r\n\r\n# -------------------------------\r\n# 3️⃣ Ensure vercel.json exists\r\n# -------------------------------\r\n$vercelJsonPath = \".\\vercel.json\"\r\nif (-Not (Test-Path $vercelJsonPath)) {\r\n    Write-Host \"Creating vercel.json...\"\r\n    @\"\r\n{\r\n  \"version\": 2,\r\n  \"builds\": [\r\n    {\r\n      \"src\": \"package.json\",\r\n      \"use\": \"@vercel/static-build\",\r\n      \"config\": { \"distDir\": \"build\" }\r\n    }\r\n  ],\r\n  \"routes\": [\r\n    { \"src\": \"/(.*)\", \"dest\": \"/index.html\" }\r\n  ]\r\n}\r\n\"@ | Out-File $vercelJsonPath -Encoding utf8\r\n} else {\r\n    Write-Host \"vercel.json already exists, ensure it matches the correct config.\"\r\n}\r\n\r\n# -------------------------------\r\n# 4️⃣ Build React app\r\n# -------------------------------\r\nWrite-Host \"Building React app...\"\r\nnpm install\r\nnpm run build\r\n\r\n# Check if build folder exists\r\nif (-Not (Test-Path \".\\build\\index.html\")) {\r\n    Write-Host \"❌ Build failed or build/index.html missing!\"\r\n    exit\r\n}\r\n\r\n# -------------------------------\r\n# 5️⃣ Test locally with serve\r\n# -------------------------------\r\nif (-Not (Get-Command serve -ErrorAction SilentlyContinue)) {\r\n    Write-Host \"Installing 'serve' globally...\"\r\n    npm install -g serve\r\n}\r\nWrite-Host \"Starting local test at http://localhost:5000 ...\"\r\nStart-Process \"cmd\" \"/c serve -s build\"\r\n\r\n# -------------------------------\r\n# 6️⃣ Link project to Vercel\r\n# -------------------------------\r\nWrite-Host \"Linking project to Vercel...\"\r\nvercel link\r\n\r\n# -------------------------------\r\n# 7️⃣ Deploy to production\r\n# -------------------------------\r\nWrite-Host \"Deploying to Vercel production...\"\r\nvercel --prod\r\n\r\nWrite-Host \"✅ Deployment complete! Check your production URL.\"\r\n"
+        }
+    ]
+}

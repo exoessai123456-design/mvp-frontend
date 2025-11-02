@@ -50,7 +50,7 @@ export default function Dashboard() {
       .then(res => res.json())
       .then(setEvents)
       .catch(console.error);
-  }, [token]);
+  }, [authHeaders]);
 
   const isDateBeforeToday = (dateStr) => {
     if (!dateStr) return false;

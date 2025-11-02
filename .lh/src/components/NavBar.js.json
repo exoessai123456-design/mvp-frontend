@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/NavBar.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1762103566968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1762103566968,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\r\nimport {\r\n  AppBar,\r\n  Toolbar,\r\n  Typography,\r\n  Box,\r\n  Menu,\r\n  MenuItem,\r\n  ListItemIcon, ListItemText\r\n} from '@mui/material';\r\nimport KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';\r\nimport LogoutIcon from '@mui/icons-material/Logout';\r\n\r\nexport default function NavBar({ username, onLogout }) {\r\n  const [anchorEl, setAnchorEl] = useState(null);\r\n  const open = Boolean(anchorEl);\r\n\r\n  const handleClick = (event) => {\r\n    setAnchorEl(event.currentTarget);\r\n  };\r\n\r\n  const handleClose = () => {\r\n    setAnchorEl(null);\r\n  };\r\n\r\n  const handleLogout = () => {\r\n    handleClose();\r\n    onLogout();\r\n  };\r\n\r\n  return (\r\n    <AppBar position=\"static\">\r\n      <Toolbar sx={{ justifyContent: 'space-between' }}>\r\n        <Typography variant=\"h6\">Admin Dashboard</Typography>\r\n\r\n        <Box display=\"flex\" alignItems=\"center\" gap={2}>\r\n          <Box\r\n            onClick={handleClick}\r\n            sx={{\r\n              display: 'flex',\r\n              alignItems: 'center',\r\n              cursor: 'pointer',\r\n              fontWeight: 'bold',\r\n            }}\r\n          >\r\n            <Typography>{username}</Typography>\r\n            <KeyboardArrowDownIcon\r\n              sx={{\r\n                ml: 0.5,\r\n                transition: 'transform 0.2s',\r\n                transform: open ? 'rotate(180deg)' : 'rotate(0deg)',\r\n              }}\r\n            />\r\n          </Box>\r\n\r\n          <Menu\r\n            anchorEl={anchorEl}\r\n            open={open}\r\n            onClose={handleClose}\r\n            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}\r\n            transformOrigin={{ vertical: 'top', horizontal: 'right' }}\r\n             PaperProps={{sx: {width: 150 }}}\r\n          >\r\n            {/* <MenuItem onClick={handleLogout}>Logout</MenuItem> */}\r\n            <MenuItem onClick={handleLogout}>\r\n                 <ListItemIcon>\r\n                       <LogoutIcon fontSize=\"small\" />\r\n                 </ListItemIcon>\r\n                 <ListItemText>Logout</ListItemText>\r\n</MenuItem>\r\n          </Menu>\r\n        </Box>\r\n      </Toolbar>\r\n    </AppBar>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

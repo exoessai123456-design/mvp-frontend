@@ -4,6 +4,8 @@ import LoginForm from './components/LoginForm';
 import Dashboard from './components/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
+import { SpeedInsights } from "@vercel/speed-insights/react";
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <SpeedInsights />
     </Router>
   );
 }
